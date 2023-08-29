@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QReator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img width="35" height="35" src="https://img.icons8.com/tiny-color/35/qr-code.png" alt="qr-code" />
+            </div>
+            <div class="title">QReator</div>
+        </nav>
+    </header>
+
+    <div class="qr-container">
+        <div class="item left-qr-container">
+
+            <form action="/scan" method="POST" class="form-group" id="qr-form">
+                <h5>Enter URL</h5>
+                <input type="url" name="url" id="url" placeholder="https://" class="form" required><br>
+                <div class="options">
+                    <div class="options-control">
+                        <h5>Options</h5>
+                        <div class="toggle">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="option-1">
+                        <h2>Width</h2>
+                        <div class="width-details">
+                            <button type="button" class="pixel-btn" data-pixels="300">300 X 300</button>
+                            <button type="button" class="pixel-btn" data-pixels="500">500 X 500</button>
+                            <button type="button" class="pixel-btn" data-pixels="600">600 X 600</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="generate-btn">
+                    <button id="generate-button" class="generate" type="submit">Generate QR</button>
+                </div>
+            </form>
+            <form action="/actions" method="POST" id="action-form">
+                <div class="action">
+                    <% const hasImage = locals.image; %>
+                        <% const disabled = hasImage ? '' : 'disabled'; %>
+                            <button type="submit" id="png-button" name="button" value="png" <%=disabled %>>PNG</button>
+                            <button type="submit" id="svg-button" name="button" value="svg" <%=disabled %>>SVG</button>
+                            <button type="submit" class="clear" name="button" value="clear">CLEAR</button>
+                </div>
+
+            </form>
+
+        </div>
+        <div class=" right-qr-container">
+            <div class="qr-svg">
+                <% if (locals.image) { %>
+                    <img src="<%= image %>" alt="">
+                    <% } else { %>
+                        <object data="images/qrcode.svg"></object>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
